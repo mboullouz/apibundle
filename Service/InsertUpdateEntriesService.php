@@ -106,7 +106,7 @@ class InsertUpdateEntriesService {
             if (empty($this->entryId)) {
                 $event->preInsert($entity);
             } else {
-                $event->postUpdate(EntityID::of($this->entryId));
+                $event->preUpdate($entity);
             }
         }
         $this->em->persist($entity);
@@ -195,9 +195,9 @@ class InsertUpdateEntriesService {
                     $reflectionMethod->invoke($entity, $relatedEntity);
                 }
 
-            } else if (!empty($paramClass)) { /* cas complex object */
+            } else if (!empty($paramClass)) { /* case of complex object */
                 $paramClassName = $paramClass->getName();
-                if ((strpos($paramClassName, 'Date') !== false)) {
+                if ((strpos($paramClassName, 'Date') !== false)) { //date case
                     $propValue = \DateTime::createFromFormat("Y-m-d H:i:s", $propValue);
                 } else {
                     $propValue = $this->getIndividualRelatedEntityByParamProperties($params, $propValue);

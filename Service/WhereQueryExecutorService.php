@@ -8,7 +8,6 @@ use Axescloud\ApiBundle\Utils\QueryOperators;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
-use JMS\Serializer\SerializerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -29,7 +28,7 @@ class WhereQueryExecutorService {
      */
     protected $em;
     protected $request;
-    protected $serializer;
+
     protected $logger;
     private $comparatorsArray = [];
     private $maxResults = 50;
@@ -45,7 +44,7 @@ class WhereQueryExecutorService {
         $this->container = $container;
         $this->request = $container->get('request_stack')->getCurrentRequest();
         $this->em = $container->get("doctrine")->getManager();
-        $this->serializer =  SerializerBuilder::create()->build();
+
         $this->logger = $this->container->get('logger');
         $this->operatorType = QueryOperators::AND_LOGIC_OPERATOR;
         // parse
@@ -101,7 +100,6 @@ class WhereQueryExecutorService {
         if (empty ($this->orderBy)) {
             $this->logger->info('********* WhereQueryExecutorService  "orderBy" array is null *********** ');
         }
-        //Je croie que pour le moment il ne peut y avoir qu'un seul orderby (un tableau a une case --')
         foreach ($this->orderBy as $key => $value) {
             try {
                 $queryBuilder->orderBy("A." . $key, $value);

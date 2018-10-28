@@ -5,15 +5,23 @@
 
 namespace Axescloud\ApiBundle\Utils;
 
-use JMS\Serializer\Naming\SerializedNameAnnotationStrategy;
 use JMS\Serializer\SerializationContext;
+use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializerBuilder;
 
 class JsonSerializer {
+    /**
+     * @var Serializer
+     */
+    private static $instance = null;
+
     public static function toJson($data = null) {
-        return SerializerBuilder::create()
-            ->setPropertyNamingStrategy(new \JMS\Serializer\Naming\IdenticalPropertyNamingStrategy())
-            ->build()
+        if (empty(self::$instance)) {
+            self::$instance = SerializerBuilder::create()
+                ->setPropertyNamingStrategy(new \JMS\Serializer\Naming\IdenticalPropertyNamingStrategy())
+                ->build();
+        }
+        return self::$instance
             ->serialize($data, 'json', SerializationContext::create()->enableMaxDepthChecks());
 
     }

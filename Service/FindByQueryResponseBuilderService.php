@@ -35,13 +35,14 @@ class FindByQueryResponseBuilderService {
      * @param string $repositoryName
      * @return string: encoded json string
      */
-    public function getJsonResponseForRepository($repositoryName = "", $filters = [], $transformers = []): string {
+    public function getJsonResponseForRepository($repositoryName, $filters = [], $transformers = []): string {
         /** @var EntityManager $em */
         $em = $this->container->get("doctrine");
         $queryParser = $this->container->get("Axescloud.FindByQueryParserService");
 
         try {
-            $entities = $em->getRepository($repositoryName)->findBy($queryParser->getFindBy(), $queryParser->getOrderBy(), $queryParser->getMaxResults(), $queryParser->getOffset());
+            $entities = $em->getRepository($repositoryName)
+                           ->findBy($queryParser->getFindBy(), $queryParser->getOrderBy(), $queryParser->getMaxResults(), $queryParser->getOffset());
             if (!empty ($transformers) && !empty ($entities)) {
                 foreach ($entities as $et) {
                     foreach ($transformers as $modifier) {
