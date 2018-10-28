@@ -110,12 +110,7 @@ class InsertUpdateEntriesService {
             }
         }
         $this->em->persist($entity);
-        try {
-            $this->em->flush();
-        } catch (\Exception $e) {
-            $this->logger->error("err: " . $e->getMessage());
-        }
-
+        $this->em->flush();
         /** @var  $event ApiEvent */
         foreach ($events as $event) {
             if (empty($this->entryId)) {
