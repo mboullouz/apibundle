@@ -25,7 +25,7 @@ class FindByQueryParserService {
 
     public function __construct(ContainerInterface $container) {
         $this->container = $container;
-        $this->request = $container->get('request');
+        $this->request = $container->get('request_stack')->getCurrentRequest();
         $this->em = $container->get("doctrine")->getManager();
         $this->logger = $this->container->get('logger');
 

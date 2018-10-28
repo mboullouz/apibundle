@@ -9,12 +9,12 @@ services:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 200 }
     
     Axescloud.FindByQueryParserService:
-        class     : Axescsloud\ApiBundle\Service\FindByQueryParserService
+        class     : Axescloud\ApiBundle\Service\FindByQueryParserService
         arguments :
             - "@service_container"
 
     Axescloud.FindByQueryResponseBuilderService:
-        class     : Axescsloud\ApiBundle\Service\FindByQueryResponseBuilderService
+        class     : Axescloud\ApiBundle\Service\FindByQueryResponseBuilderService
         arguments :
             - "@service_container"
 
