@@ -1,0 +1,41 @@
+{
+  "name": "axescloud/api",
+  "type": "symfony-bundle",
+  "description": "A simple way to do CRUD on doctrine entities via http",
+  "keywords": [
+    "api",
+    "rest",
+    "orm",
+    "crud"
+  ],
+  "homepage": "http://axescloud.com",
+  "license": "AGPL",
+  "authors": [
+    {
+      "name": "M Boullouz",
+      "email": "mohamed.boullouz+sa@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.1",
+    "symfony/symfony": "^3.0",
+    "sensio/framework-extra-bundle": "^3.0",
+    "doctrine/orm": "^2.6",
+    "doctrine/doctrine-bundle": "^1.9.1",
+    "symfony/monolog-bundle": "^2.4",
+    "jms/serializer": "^1.13"
+  },
+  "require-dev": {
+    "symfony/browser-kit": "^4.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Axescloud\\ApiBundle\\": ""
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  }
+}

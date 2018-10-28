@@ -1,0 +1,33 @@
+parameters:
+#    x.example.class: BlahBundle\Example
+
+services:
+
+    Axescloud.JsonExceptionListener:
+        class: Axescloud\ApiBundle\Execeptions\JsonExceptionListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 200 }
+    
+    Axescloud.FindByQueryParserService:
+        class     : Axescsloud\ApiBundle\Service\FindByQueryParserService
+        arguments :
+            - "@service_container"
+
+    Axescloud.FindByQueryResponseBuilderService:
+        class     : Axescsloud\ApiBundle\Service\FindByQueryResponseBuilderService
+        arguments :
+            - "@service_container"
+
+    
+    Axescloud.InsertUpdateEntriesService:
+        class     : Axescloud\ApiBundle\Service\InsertUpdateEntriesService
+        arguments :
+            - "@service_container"
+             
+    Axescloud.WhereQueryExecutorService:
+        class     : Axescloud\ApiBundle\Service\WhereQueryExecutorService
+        arguments :
+            - "@service_container"
+
+           
+    
